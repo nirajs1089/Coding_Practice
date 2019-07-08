@@ -55,10 +55,9 @@ def stacked_bar_graph():
     # Show graphic
     plt.show()
 
-def grouped_barplot(values,firstlevel_din):
+def grouped_barplot(values,firstlevel_din,secondlevel_din): #side by side bars 
 
     # set width of bar
-    #add more colors based on second level grouping which must be <= 5
     dict_color = {0:'#7f6d5f',1:'#557f2d',2:'#2d7f5e'}
 
     barWidth = 0.25
@@ -70,22 +69,23 @@ def grouped_barplot(values,firstlevel_din):
 
     for b in values:
         pos_x.append([x + barWidth for x in pos_x[counter]])
-        counter += 1
+    counter += 1
 
 
     # Make the plot
     counter = 0
     for b in values:
-        plt.bar(pos_x[counter], b, color=dict_color[counter], width=barWidth, edgecolor='white', label='var1')
+        plt.bar(pos_x[counter], b, color=dict_color[counter], width=barWidth, edgecolor='white', label=secondlevel_din[counter])
         counter +=1
+
 
     # Add xticks on the middle of the group bars
     plt.xlabel('group', fontweight='bold')
-    plt.xticks([r + barWidth for r in range(len(values[0]))],firstlevel_din)
+    plt.xticks([r + barWidth for r in range(len(values[0]))],firstlevel_din,rotation=30,fontsize=6)
 
     # Create legend & Show graphic
     plt.legend()
-    plt.show()    
+    plt.show()
   
 
 #----------bar_graph-----------------
