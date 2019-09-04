@@ -1,3 +1,6 @@
+import re
+import json
+
 def find_by_key(data, target):  # get the scalar value NOT a dict as a value for the matched key
 
     """
@@ -75,3 +78,26 @@ def find_by_key_pattern(data, target):
                 yield from find_by_key_pattern(value, target)
             elif isinstance(value, list) and len(value) > 0:
                 yield from find_by_key_pattern(value[0], target)
+ 
+#--------------------------------------------------------------------------------
+
+ try:
+
+            # convert json to dictionary keeping the order of the keys intact
+            dict_plan = json.loads(pOutboudPlan, object_pairs_hook=OrderedDict, strict=False)
+            
+            for d in find_by_key_pattern(pDict_plan, "^origin$"):
+                 agg_id = d['id']
+            
+
+            # -----------------------------get the non subquery table names-------------------------
+            lst_tbl = [x for x in find_table_key(pDict_plan, "table")]
+
+
+            # -----------------------------get the subquery table names-------------------------
+            for d in find_by_key_pattern(pDict_plan, "subquery-\d"):
+                for q in find_by_key(d, "query"):
+
+        except json.decoder.JSONDecodeError:  # throws error only for Invalid JSON
+            return pd.Series([None, None])
+                
