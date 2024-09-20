@@ -1,0 +1,76 @@
+
+
+def table_data(headers, rows):
+    """place holder for table data"""
+    # headers = [
+    #     "left",
+    #     "right",
+    #     "substring",
+    #     "seen",
+    #     "exists",
+    #     "max_len"
+    # ]
+    # rows = []
+
+    # rows.append(["Entering inner loop", "", "", "", ""])
+    # print(["Entering inner loop", "", "", "", ""])
+    #
+    # ADD CHANING VALUES AS STR TO SHOW INCREMENTALLY
+    # rows.append([#var1#, #var2#, #var3#, #var4#, #var5#])
+    # # rows.append([,,,])
+    # # print([,,,])
+    #
+    # rows.append(["Exiting inner loop", "", "", "", ""])
+    # print(["Exiting inner loop", "", "", "", ""])
+
+    print(tabulate(rows, headers=headers))
+    def max_profit(c, k, capitals, profits):
+    """
+    """
+
+    headers = ["ix", "alpha", "letter", "letter2", "out"]
+    capitals_heap = []
+    profits_heap = []
+    rows = []
+    max_profit = 0
+
+
+    headers = ["ix", "capitals_heap"]
+    # create a min heap for all the capitals
+    # CREATE a min heap for all the capitals alongwith the index
+    for ix,cap in enumerate(capitals):
+        rows.append([ix,str(capitals_heap)])
+        heappush(capitals_heap,(cap,ix))
+
+    table_data(headers,rows)
+
+    # print(heappop(capitals_heap))
+
+    # iterate over the capitals heap for k times (max no projects )
+
+    headers = ["ix", "c", "capitals_heap", "min_cap", "profits_heap","max_profit"]
+    rows = []
+
+    for _ in range(k):
+        # compare if your cuurent capital is > = to the popped capital
+        while c and c >= capitals_heap[0][0]:
+            min_cap = heappop(capitals_heap)
+            # if so push the capital onto a max heap
+            heappush(profits_heap, -profits[min_cap[1]]) # convert min to max heap
+            rows.append([ix, c, str(capitals_heap), min_cap, str(profits_heap),max_profit])
+            if  len(capitals_heap) == 0:
+                break
+
+
+        if not profits_heap:
+            break
+            # iterate over the profit heap and pop the top max
+        max_profit = -heappop(profits_heap)
+        # add that to the current capital till k projects an
+        c = c + max_profit
+
+    table_data(headers, rows)
+
+    # push that onto a max heap
+
+max_profit(1, 2, [1, 2, 2, 3], [2, 4, 6, 8])
