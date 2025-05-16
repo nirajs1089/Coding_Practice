@@ -50,6 +50,8 @@
                 # Post-order: push work after children
                 stack.append((node, STATE_AFTER, None))
                 # Push children to be processed first
+                # modify the children before pushing on to stack
+                stack.append((node.right + node.data, STATE_INITIAL, None))
                 stack.append((node.right, STATE_INITIAL, None))
                 stack.append((node.left, STATE_INITIAL, None))
             else:
