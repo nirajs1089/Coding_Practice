@@ -54,6 +54,7 @@
                 stack.append((node.right + node.data, STATE_INITIAL, None))
                 stack.append((node.right, STATE_INITIAL, None))
                 stack.append((node.left, STATE_INITIAL, None))
+                stack.append((parent[node], STATE_INITIAL, None)) #if parent dict is created then use parent as 3rd child to traverse in all directions
             else:
                 # STATE_AFTER: children done, compute using data collected
                 # left_val, right_val = data
