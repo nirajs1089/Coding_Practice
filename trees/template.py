@@ -16,12 +16,12 @@
 
         self.result = INITIAL_VALUE  # e.g. 0, float('-inf'), []
 
-        def dfs(node: TreeNode) -> int:
+        def dfs(node: TreeNode, count) -> int:
             if not node:
                 return BASE_VALUE  # e.g. 0 for depths, 1 for counts
             # Recurse left and right
-            left_val = dfs(node.left)
-            right_val = dfs(node.right)
+            left_val = dfs(node.left,INITIAL_VALUE + INCREMENT)  #compound additon
+            right_val = dfs(node.right,INITIAL_VALUE + INCREMENT)
 
             # Combine: update global result if needed
             # self.result = max(self.result, left_val + right_val + EXTRA)
