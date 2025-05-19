@@ -15,12 +15,15 @@
         # Uncomment and adapt this block if a post-order recursion fits the problem.
 
         self.result = INITIAL_VALUE  # e.g. 0, float('-inf'), []
+        visited = set()
 
         def dfs(node: TreeNode, count) -> int:
-            if not node:
+            if not node and node not in visited:
                 return BASE_VALUE  # e.g. 0 for depths, 1 for counts
+
+            visited.add(node)  # to avoid duplicate node processing and avoid cycles in tree
             # Recurse left and right
-            left_val = dfs(node.left,INITIAL_VALUE + INCREMENT)  #compound additon
+            left_val = dfs(node.left,INITIAL_VALUE + INCREMENT)  #compound addition
             right_val = dfs(node.right,INITIAL_VALUE + INCREMENT)
 
             # Combine: update global result if needed
