@@ -1,7 +1,7 @@
 from ssl import SSLError, SSLCertVerificationError
 
 import requests
-
+import json
 
 class Client(object):
     def __init__(self, url: str, ssl_verify=True, cert_path=None):
@@ -12,7 +12,8 @@ class Client(object):
             self.ssl_verify = ssl_verify
 
     def get(self) -> str:
-        return str(requests.get(self.url,verify=self.ssl_verify).content)
+        body = requests.get(self.url,verify=self.ssl_verify).content
+        return json.loads(body)
 
 
 if __name__ == '__main__':
